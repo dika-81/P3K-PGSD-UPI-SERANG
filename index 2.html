@@ -1,0 +1,1985 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Penilaian P3K DPL PGSD UPI Serang</title>
+  <style>
+    :root {
+      --bg: #f4f7fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --line: #d9e1ec;
+      --primary: #1f5fbf;
+      --primary-dark: #174a98;
+      --soft: #eaf2ff;
+      --ok: #16794c;
+      --ok-bg: #e7f7ef;
+      --bad: #b42318;
+      --bad-bg: #fff0ed;
+      --warn: #a15c00;
+      --warn-bg: #fff7e6;
+      --shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(120deg, #123b7d, #1f5fbf 55%, #4b8df7);
+      color: #fff;
+      padding: 26px 22px;
+    }
+
+    .header-wrap {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    h1, h2, h3 { margin: 0; }
+    h1 { font-size: 27px; line-height: 1.2; margin-bottom: 8px; }
+    h2 { font-size: 20px; margin-bottom: 12px; }
+    h3 { font-size: 16px; margin-bottom: 8px; }
+
+    .subtitle {
+      margin: 0;
+      opacity: .94;
+      line-height: 1.55;
+      max-width: 820px;
+    }
+
+    .badge-brand {
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.26);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    main {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 18px 16px 42px;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 6px 0 18px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 247, 251, .94);
+      backdrop-filter: blur(8px);
+      padding: 10px 0;
+    }
+
+    .tab-btn {
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--text);
+      padding: 10px 13px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      transition: .18s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+      box-shadow: 0 6px 16px rgba(31, 95, 191, .25);
+    }
+
+    .section { display: none; }
+    .section.active { display: block; }
+
+    .grid { display: grid; gap: 16px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .grid-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+
+    @media (max-width: 1050px) {
+      .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 860px) {
+      .grid-2, .grid-3, .grid-4, .grid-5 { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .note {
+      color: var(--muted);
+      line-height: 1.55;
+      font-size: 14px;
+      margin: 6px 0 12px;
+    }
+
+    .stat {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: white;
+    }
+
+    .stat .num {
+      font-size: 32px;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .stat.primary .num { color: var(--primary); }
+    .stat.ok .num { color: var(--ok); }
+    .stat.bad .num { color: var(--bad); }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin: 10px 0 6px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 10px 11px;
+      font-size: 14px;
+      background: #fff;
+      color: var(--text);
+      outline: none;
+    }
+
+    textarea { min-height: 92px; resize: vertical; }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(31, 95, 191, .12);
+    }
+
+    input[type="file"] { display: none; }
+
+    button, .file-label {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 10px 13px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      line-height: 1;
+    }
+
+    button:hover, .file-label:hover { background: var(--primary-dark); }
+
+    button.secondary {
+      background: #eef3fb;
+      color: #24415f;
+      border: 1px solid #d6e0ee;
+    }
+
+    button.secondary:hover { background: #e2eaf6; }
+
+    button.danger {
+      background: #fff0ed;
+      color: var(--bad);
+      border: 1px solid #ffd2ca;
+    }
+
+    button.danger:hover { background: #ffe3dd; }
+
+    button.okbtn {
+      background: var(--ok-bg);
+      color: var(--ok);
+      border: 1px solid #b9ead0;
+    }
+
+    button.okbtn:hover { background: #d7f1e3; }
+
+    button.warnbtn {
+      background: var(--warn-bg);
+      color: var(--warn);
+      border: 1px solid #ffe0a3;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin: 12px 0;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: white;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 11px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f2f6fc;
+      color: #344054;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .03em;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .pill.ok { background: var(--ok-bg); color: var(--ok); border: 1px solid #b9ead0; }
+    .pill.bad { background: var(--bad-bg); color: var(--bad); border: 1px solid #ffd2ca; }
+    .pill.warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #ffe0a3; }
+    .pill.primary { background: var(--soft); color: var(--primary); border: 1px solid #cfe0ff; }
+
+    .small { font-size: 12px; color: var(--muted); }
+
+    .actions { display: flex; gap: 6px; flex-wrap: wrap; }
+    .actions button { padding: 7px 9px; border-radius: 10px; font-size: 12px; }
+
+    .search-row {
+      display: grid;
+      grid-template-columns: 1fr 240px 180px;
+      gap: 10px;
+      align-items: end;
+    }
+
+    @media (max-width: 820px) {
+      .search-row { grid-template-columns: 1fr; }
+    }
+
+    .dpl-box {
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .dpl-box h3 {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .link-list a {
+      display: inline-flex;
+      margin: 2px 6px 2px 0;
+      padding: 6px 8px;
+      border-radius: 999px;
+      background: #f2f6fc;
+      border: 1px solid #d8e2ef;
+      color: #174a98;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .link-list a:hover { background: #eaf2ff; }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .score-preview {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .print-only { display: none; }
+
+    @media print {
+      body { background: white; }
+      header, .tabs, .no-print, .toolbar, button, .file-label, input, select, textarea { display: none !important; }
+      main { padding: 0; max-width: none; }
+      .card { box-shadow: none; border: 0; border-radius: 0; padding: 0; }
+      .section { display: none !important; }
+      .section.print-active { display: block !important; }
+      .print-only { display: block; }
+      .table-wrap { border: 0; overflow: visible; }
+      table { min-width: 0; font-size: 11px; }
+      th, td { padding: 7px; }
+    }
+
+    /* ===== Login & peran ===== */
+    body.locked main { display: none; }
+    body.locked header .badge-brand { display: none; }
+
+    #loginOverlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+      overflow-y: auto;
+      background: linear-gradient(160deg, #0f2f63, #1f5fbf 60%, #4b8df7);
+    }
+
+    body.locked #loginOverlay { display: flex; }
+
+    .login-card {
+      width: 100%;
+      max-width: 430px;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(8, 25, 60, .35);
+      padding: 26px 24px;
+      margin-top: 10px;
+    }
+
+    .login-card h2 { font-size: 22px; margin-bottom: 6px; }
+    .login-card .note { margin-top: 0; }
+
+    .login-role {
+      display: flex;
+      gap: 8px;
+      margin: 14px 0 6px;
+    }
+
+    .login-role button {
+      flex: 1;
+      background: #eef3fb;
+      color: #24415f;
+      border: 1px solid #d6e0ee;
+      padding: 11px;
+    }
+
+    .login-role button.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
+
+    .login-form { display: none; margin-top: 6px; }
+    .login-form.active { display: block; }
+
+    .login-error {
+      display: none;
+      margin: 10px 0 0;
+      padding: 9px 11px;
+      border-radius: 10px;
+      background: var(--bad-bg);
+      color: var(--bad);
+      border: 1px solid #ffd2ca;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .login-error.show { display: block; }
+
+    .login-hint {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+      border-top: 1px dashed var(--line);
+      padding-top: 12px;
+    }
+
+    #userBar {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    body.authed #userBar { display: flex; }
+
+    #userBar .who {
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.26);
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    #userBar button {
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.4);
+      color: #fff;
+    }
+
+    #userBar button:hover { background: rgba(255,255,255,.28); }
+
+    /* Sembunyikan elemen khusus Kaprodi saat login sebagai DPL */
+    body.role-dpl .kaprodi-only { display: none !important; }
+
+    .mono {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      letter-spacing: .04em;
+    }
+
+    .pw-cell { display: flex; align-items: center; gap: 6px; }
+    .pw-cell input { max-width: 150px; }
+  </style>
+</head>
+<body class="locked">
+  <div id="loginOverlay">
+    <div class="login-card">
+      <h2>Penilaian P3K DPL PGSD UPI Serang</h2>
+      <p class="note">Silakan masuk untuk mengakses penilaian. DPL hanya dapat melihat dan menilai mahasiswa bimbingannya.</p>
+
+      <div class="login-role">
+        <button id="roleBtnDpl" class="active" onclick="setLoginRole('dpl')">Masuk sebagai DPL</button>
+        <button id="roleBtnKaprodi" onclick="setLoginRole('kaprodi')">Masuk sebagai Kaprodi</button>
+      </div>
+
+      <div id="loginFormDpl" class="login-form active">
+        <label>Nama DPL</label>
+        <select id="loginDplSelect"></select>
+        <label>Password DPL</label>
+        <input id="loginDplPass" type="password" placeholder="Masukkan password Anda" onkeydown="if(event.key==='Enter')doLoginDpl()">
+        <div style="margin-top:12px;">
+          <button onclick="doLoginDpl()">Masuk</button>
+        </div>
+      </div>
+
+      <div id="loginFormKaprodi" class="login-form">
+        <label>Password Kaprodi</label>
+        <input id="loginKaprodiPass" type="password" placeholder="Masukkan password Kaprodi" onkeydown="if(event.key==='Enter')doLoginKaprodi()">
+        <div style="margin-top:12px;">
+          <button onclick="doLoginKaprodi()">Masuk sebagai Kaprodi</button>
+        </div>
+      </div>
+
+      <div id="loginError" class="login-error"></div>
+
+      <div class="login-hint" id="loginHint"></div>
+    </div>
+  </div>
+
+  <header>
+    <div class="header-wrap">
+      <div>
+        <h1>Penilaian P3K DPL PGSD UPI Serang</h1>
+        <p class="subtitle">
+          Web statis untuk membaca CSV pembagian DPL–mahasiswa, mengelompokkan mahasiswa per DPL,
+          dan menginput nilai berkas P3K: RPP, media, alat evaluasi, bahan ajar, dan laporan akhir.
+        </p>
+      </div>
+      <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <div id="userBar">
+          <span class="who" id="userWho"></span>
+          <button onclick="logout()">Keluar</button>
+        </div>
+        <div class="badge-brand">PGSD UPI Kampus Serang</div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <nav class="tabs no-print" id="tabs"></nav>
+
+    <section id="dashboard" class="section active">
+      <div class="grid grid-4">
+        <div class="stat primary"><div class="num" id="statMhs">0</div><div class="label">Total mahasiswa</div></div>
+        <div class="stat primary"><div class="num" id="statDpl">0</div><div class="label">Total DPL</div></div>
+        <div class="stat ok"><div class="num" id="statDinilai">0</div><div class="label">Mahasiswa sudah dinilai</div></div>
+        <div class="stat bad"><div class="num" id="statBelum">0</div><div class="label">Mahasiswa belum dinilai</div></div>
+      </div>
+
+      <div class="card kaprodi-only">
+        <h2>Mulai dari CSV</h2>
+        <p class="note">
+          Unggah CSV hasil dari Google Sheets/Excel. Program akan otomatis membuat grouping DPL beserta mahasiswa bimbingannya.
+          Kolom minimal: <b>DPL, NIM, Nama</b>. Kolom link berkas bersifat opsional.
+        </p>
+
+        <div class="toolbar">
+          <label class="file-label" for="csvInput">Unggah CSV Pembagian DPL</label>
+          <input type="file" id="csvInput" accept=".csv" onchange="importCSV(event)">
+          <button class="secondary" onclick="downloadTemplateCSV()">Unduh Template CSV</button>
+          <button class="secondary" onclick="loadDemoData()">Isi Contoh 15 DPL × 8 Mahasiswa</button>
+          <button class="danger" onclick="resetAll()">Reset Semua</button>
+        </div>
+
+        <p class="small">
+          Format CSV disarankan:
+          dpl, nim, nama, kelas, sekolah, link_rpp, link_media, link_alat_evaluasi, link_bahan_ajar, link_laporan_akhir
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Grouping DPL</h2>
+        <div id="dplGrouping" class="grid grid-3"></div>
+      </div>
+    </section>
+
+    <section id="data" class="section">
+      <div class="card">
+        <h2>Data Mahasiswa dari CSV</h2>
+        <div class="search-row no-print">
+          <div>
+            <label>Cari Data</label>
+            <input id="searchData" placeholder="Cari nama, NIM, DPL, sekolah, kelas" oninput="renderAll()">
+          </div>
+          <div>
+            <label>Filter DPL</label>
+            <select id="filterDplData" onchange="renderAll()"></select>
+          </div>
+          <div>
+            <label>Filter Penilaian</label>
+            <select id="filterNilaiData" onchange="renderAll()">
+              <option value="">Semua</option>
+              <option value="sudah">Sudah Dinilai</option>
+              <option value="belum">Belum Dinilai</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>DPL</th><th>NIM</th><th>Nama</th><th>Kelas</th><th>Sekolah</th>
+                <th>Link Berkas</th><th>Nilai Akhir</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tblData"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="penilaian" class="section">
+      <div class="card">
+        <h2>Form Penilaian DPL</h2>
+        <p class="note">
+          Pilih DPL, lalu pilih mahasiswa. Nilai lima komponen berkas menggunakan skala 0–100.
+          Nilai akhir dihitung dari rata-rata lima komponen, kecuali bobot diubah.
+        </p>
+
+        <div class="grid grid-3">
+          <div>
+            <label>Pilih DPL</label>
+            <select id="pilihDpl" onchange="onDplChange()"></select>
+          </div>
+          <div>
+            <label>Pilih Mahasiswa</label>
+            <select id="pilihMahasiswa" onchange="loadAssessmentForm()"></select>
+          </div>
+          <div>
+            <label>Tanggal Penilaian</label>
+            <input id="tanggalNilai" type="date">
+          </div>
+        </div>
+
+        <div class="card" style="box-shadow:none; background:#f8fbff;">
+          <h3>Identitas dan Berkas Mahasiswa</h3>
+          <div id="studentInfo" class="note">Belum ada mahasiswa dipilih.</div>
+          <div class="link-list" id="studentLinks"></div>
+        </div>
+
+        <div class="grid grid-5">
+          <div>
+            <label>RPP</label>
+            <input id="nilaiRpp" type="number" min="0" max="100" placeholder="0-100" oninput="previewScore()">
+          </div>
+          <div>
+            <label>Media</label>
+            <input id="nilaiMedia" type="number" min="0" max="100" placeholder="0-100" oninput="previewScore()">
+          </div>
+          <div>
+            <label>Alat Evaluasi</label>
+            <input id="nilaiEvaluasi" type="number" min="0" max="100" placeholder="0-100" oninput="previewScore()">
+          </div>
+          <div>
+            <label>Bahan Ajar</label>
+            <input id="nilaiBahan" type="number" min="0" max="100" placeholder="0-100" oninput="previewScore()">
+          </div>
+          <div>
+            <label>Laporan Akhir</label>
+            <input id="nilaiLaporan" type="number" min="0" max="100" placeholder="0-100" oninput="previewScore()">
+          </div>
+        </div>
+
+        <div class="grid grid-5">
+          <div>
+            <label>Bobot RPP (%)</label>
+            <input id="bobotRpp" type="number" min="0" max="100" oninput="saveBobot()">
+          </div>
+          <div>
+            <label>Bobot Media (%)</label>
+            <input id="bobotMedia" type="number" min="0" max="100" oninput="saveBobot()">
+          </div>
+          <div>
+            <label>Bobot Alat Evaluasi (%)</label>
+            <input id="bobotEvaluasi" type="number" min="0" max="100" oninput="saveBobot()">
+          </div>
+          <div>
+            <label>Bobot Bahan Ajar (%)</label>
+            <input id="bobotBahan" type="number" min="0" max="100" oninput="saveBobot()">
+          </div>
+          <div>
+            <label>Bobot Laporan (%)</label>
+            <input id="bobotLaporan" type="number" min="0" max="100" oninput="saveBobot()">
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <span class="pill primary" id="bobotTotal">Total bobot: 100%</span>
+          <span class="pill warn" id="previewNilai">Nilai akhir: -</span>
+          <span class="pill warn" id="previewKategori">Kategori: -</span>
+        </div>
+
+        <label>Catatan DPL</label>
+        <textarea id="catatanDpl" placeholder="Catatan singkat dosen pembimbing lapangan"></textarea>
+
+        <div class="toolbar">
+          <button onclick="saveAssessment()">Simpan Nilai</button>
+          <button class="secondary" onclick="clearAssessmentForm()">Bersihkan Nilai</button>
+          <button class="danger" onclick="deleteCurrentAssessment()">Hapus Nilai Mahasiswa Ini</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="rekap" class="section print-active">
+      <div class="card">
+        <h2>Rekap Penilaian</h2>
+        <p class="note no-print">
+          Rekap ini dapat diekspor CSV. Jika ingin tersimpan ke Google Sheets, isi URL Apps Script pada menu Pengaturan, lalu klik kirim saat menyimpan nilai.
+        </p>
+
+        <div class="toolbar no-print">
+          <button onclick="exportAssessmentCSV()">Ekspor Nilai CSV</button>
+          <button class="secondary kaprodi-only" onclick="exportFullCSV()">Ekspor Data + Nilai CSV</button>
+          <button class="secondary" onclick="printRekap()">Cetak Rekap</button>
+          <button class="secondary kaprodi-only" onclick="backupJSON()">Backup JSON</button>
+          <label class="file-label kaprodi-only" for="restoreJson">Restore JSON</label>
+          <input type="file" id="restoreJson" accept=".json" onchange="restoreJSON(event)">
+        </div>
+
+        <div class="search-row no-print">
+          <div>
+            <label>Cari Rekap</label>
+            <input id="searchRekap" placeholder="Cari nama, NIM, DPL" oninput="renderAll()">
+          </div>
+          <div>
+            <label>Filter DPL</label>
+            <select id="filterDplRekap" onchange="renderAll()"></select>
+          </div>
+          <div>
+            <label>Filter Penilaian</label>
+            <select id="filterNilaiRekap" onchange="renderAll()">
+              <option value="">Semua</option>
+              <option value="sudah">Sudah Dinilai</option>
+              <option value="belum">Belum Dinilai</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="print-only">
+          <h2>Rekap Penilaian P3K DPL PGSD UPI Serang</h2>
+          <p>Komponen: RPP, Media, Alat Evaluasi, Bahan Ajar, dan Laporan Akhir.</p>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>DPL</th><th>NIM</th><th>Nama</th><th>Kelas</th><th>Sekolah</th>
+                <th>RPP</th><th>Media</th><th>Alat Evaluasi</th><th>Bahan Ajar</th><th>Laporan</th>
+                <th>Nilai Akhir</th><th>Kategori</th><th>Catatan</th>
+              </tr>
+            </thead>
+            <tbody id="tblRekap"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="pengaturan" class="section kaprodi-only">
+      <div class="card">
+        <h2>Pengaturan Simpan ke Google Sheets</h2>
+        <p class="note">
+          Web ini tetap statis. Agar nilai bisa masuk Google Sheets, gunakan Google Apps Script sebagai jembatan.
+          Jika URL Apps Script dikosongkan, nilai hanya tersimpan di browser dan bisa diekspor CSV.
+        </p>
+
+        <label>URL Google Apps Script Web App</label>
+        <input id="appsScriptUrl" placeholder="https://script.google.com/macros/s/...../exec">
+
+        <div class="toolbar">
+          <button onclick="saveSettings()">Simpan Pengaturan</button>
+          <button class="secondary" onclick="testAppsScript()">Tes Koneksi Apps Script</button>
+        </div>
+
+        <h3>Mode Simpan Nilai</h3>
+        <select id="saveMode" onchange="saveSettings()">
+          <option value="local">Simpan lokal saja</option>
+          <option value="local_script">Simpan lokal + kirim ke Google Sheets</option>
+        </select>
+
+        <p class="note">
+          Saran awal: gunakan <b>Simpan lokal saja</b> saat uji coba. Setelah Apps Script siap, ubah ke
+          <b>Simpan lokal + kirim ke Google Sheets</b>.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Kode Apps Script</h2>
+        <p class="note">
+          File ZIP menyertakan <b>apps_script.gs</b>. Kode itu ditempel di Google Apps Script, lalu deploy sebagai Web App.
+        </p>
+        <div class="toolbar">
+          <button class="secondary" onclick="downloadAppsScript()">Unduh apps_script.gs</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="akun" class="section kaprodi-only">
+      <div class="card">
+        <h2>Password Kaprodi</h2>
+        <p class="note">
+          Password ini dipakai untuk masuk sebagai Kaprodi dan melihat seluruh grouping serta semua password DPL.
+          Segera ganti password bawaan.
+        </p>
+        <div class="grid grid-3">
+          <div>
+            <label>Password Kaprodi Saat Ini</label>
+            <input id="kaprodiPassView" type="text" class="mono" readonly>
+          </div>
+          <div>
+            <label>Password Kaprodi Baru</label>
+            <input id="kaprodiPassNew" type="text" placeholder="Ketik password baru">
+          </div>
+          <div style="display:flex; align-items:flex-end;">
+            <button onclick="changeKaprodiPassword()">Simpan Password Kaprodi</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Akun &amp; Kontrol DPL</h2>
+        <p class="note">
+          Setiap DPL punya password sendiri (dibuat otomatis dari data CSV, bisa Anda ubah).
+          Tabel ini juga memantau progres pengisian nilai tiap DPL.
+        </p>
+
+        <div class="toolbar">
+          <button class="secondary" onclick="syncAccountsManual()">Buat/Lengkapi Akun dari CSV</button>
+          <button class="secondary" onclick="downloadAccountsCSV()">Unduh Daftar Akun (CSV)</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>DPL</th><th>Jumlah Mhs</th><th>Sudah</th><th>Belum</th><th>Progres</th><th>Password</th><th>Aksi</th>
+              </tr>
+            </thead>
+            <tbody id="tblAkun"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Publikasikan untuk Para Dosen</h2>
+        <p class="note">
+          Karena web ini statis, agar para DPL melihat data &amp; akun yang sama saat dibuka di perangkat mereka,
+          tempelkan kode di bawah ini ke file <b>index.html</b> sebelum diunggah ke GitHub. Caranya: cari baris
+          <span class="mono">const EMBEDDED_SEED = {"seedVersion":1781860660099,"students":[{"dpl":"Andika Arisetyawan","nim":"230101","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230102","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230103","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230104","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230105","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230106","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230107","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Andika Arisetyawan","nim":"230108","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 1","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230201","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230202","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230203","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230204","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230205","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230206","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230207","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Firman Robiansyah","nim":"230208","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 2","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230301","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230302","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230303","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230304","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230305","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230306","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230307","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Deni Wardana","nim":"230308","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 3","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230401","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230402","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230403","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230404","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230405","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230406","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230407","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Hasna Nuraeni","nim":"230408","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 4","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230501","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230502","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230503","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230504","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230505","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230506","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230507","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Oki Supriyanto","nim":"230508","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 5","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230601","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230602","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230603","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230604","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230605","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230606","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230607","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tomi Efendi","nim":"230608","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 6","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230701","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230702","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230703","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230704","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230705","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230706","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230707","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Fatihaturosyidah","nim":"230708","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 7","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230801","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230802","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230803","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230804","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230805","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230806","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230807","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Herli Salim","nim":"230808","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 8","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230901","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230902","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230903","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230904","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230905","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230906","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230907","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Muhammad Hanif","nim":"230908","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 9","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231001","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231002","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231003","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231004","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231005","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231006","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231007","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Tatang Suratno","nim":"231008","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 10","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231101","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231102","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231103","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231104","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231105","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231106","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231107","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Susilawati","nim":"231108","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 11","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231201","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231202","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231203","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231204","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231205","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231206","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231207","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Supriadi","nim":"231208","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 12","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231301","nama":"Mahasiswa 1","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231302","nama":"Mahasiswa 2","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231303","nama":"Mahasiswa 3","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231304","nama":"Mahasiswa 4","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231305","nama":"Mahasiswa 5","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231306","nama":"Mahasiswa 6","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231307","nama":"Mahasiswa 7","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Iik Nurulpaik","nim":"231308","nama":"Mahasiswa 8","kelas":"6A","sekolah":"SD Mitra 13","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231401","nama":"Mahasiswa 1","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231402","nama":"Mahasiswa 2","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231403","nama":"Mahasiswa 3","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231404","nama":"Mahasiswa 4","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231405","nama":"Mahasiswa 5","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231406","nama":"Mahasiswa 6","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231407","nama":"Mahasiswa 7","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}},{"dpl":"Farid Rizqi Maulana","nim":"231408","nama":"Mahasiswa 8","kelas":"6B","sekolah":"SD Mitra 14","links":{"rpp":"https://drive.google.com/","media":"https://drive.google.com/","evaluasi":"https://drive.google.com/","bahan":"https://drive.google.com/","laporan":"https://drive.google.com/"}}],"assessments":{},"weights":{"rpp":20,"media":20,"evaluasi":20,"bahan":20,"laporan":20},"settings":{"appsScriptUrl":"","saveMode":"local"},"auth":{"kaprodiPassword":"fira123","dplPasswords":{"ANDIKA":"42966k","DPL 1":"j34whc","DPL 10":"swtvx6","DPL 11":"4s6t3p","DPL 12":"yf9pde","DPL 13":"ezju6y","DPL 14":"gehnts","DPL 15":"88762g","DPL 2":"c27gsc","DPL 3":"xm3rj8","DPL 4":"6up86x","DPL 5":"v6p3gy","DPL 6":"8ej3ay","DPL 7":"6zxesd","DPL 8":"k2cgy9","DPL 9":"na23xw","farid":"hhhm79","firman":"5z2qsb","hanif":"7jq7j8","Andika Arisetyawan":"f4vx6f","Deni Wardana":"y5qqfn","Farid Rizqi Maulana":"43xv3u","Fatihaturosyidah":"6t7jdd","Firman Robiansyah":"6vcjxr","Hasna Nuraeni":"xaybtj","Herli Salim":"xp72p9","Iik Nurulpaik":"jgm4ny","Muhammad Hanif":"hj8pmh","Oki Supriyanto":"ff3n2v","Supriadi":"74uehy","Susilawati":"4m2gb9","Tatang Suratno":"qv5n33","Tomi Efendi":"6xr92f"}}};;</span> lalu ganti seluruh baris itu dengan kode berikut, lalu commit/publish.
+          Ulangi langkah ini setiap ada perubahan data agar perangkat DPL ikut diperbarui.
+        </p>
+        <div class="toolbar">
+          <button onclick="copyPublishConfig()">Salin Kode Konfigurasi</button>
+          <button class="secondary" onclick="buildPublishConfig()">Tampilkan / Perbarui Kode</button>
+        </div>
+        <textarea id="publishConfig" class="mono" style="min-height:120px;" readonly placeholder="Klik 'Tampilkan / Perbarui Kode'"></textarea>
+        <p class="small">Catatan: nilai yang sudah diinput DPL sebaiknya dikumpulkan lewat Google Sheets (Apps Script), bukan dari kode ini.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== KONFIGURASI PUBLIKASI (opsional) =====
+    // Untuk membagikan data + akun ke perangkat para DPL saat dipublikasikan,
+    // ganti baris di bawah ini dengan kode dari tombol "Salin Kode Konfigurasi"
+    // pada panel Akun & Kontrol DPL, lalu publish ulang ke GitHub.
+    const EMBEDDED_SEED = null;
+    // =============================================
+
+    const STORAGE_KEY = "p3k_penilaian_dpl_statis_v3";
+    const SESSION_KEY = "p3k_sesi_login_v1";
+
+    const TABS_KAPRODI = [
+      ["dashboard", "Dashboard"],
+      ["data", "Data CSV"],
+      ["penilaian", "Penilaian"],
+      ["rekap", "Rekap"],
+      ["akun", "Akun DPL"],
+      ["pengaturan", "Pengaturan"]
+    ];
+    const TABS_DPL = [
+      ["dashboard", "Dashboard"],
+      ["data", "Data Mahasiswa"],
+      ["penilaian", "Penilaian"],
+      ["rekap", "Rekap"]
+    ];
+
+    function currentTabs() {
+      return session.role === "kaprodi" ? TABS_KAPRODI : TABS_DPL;
+    }
+
+    const defaultState = {
+      students: [],
+      assessments: {},
+      weights: { rpp: 20, media: 20, evaluasi: 20, bahan: 20, laporan: 20 },
+      settings: { appsScriptUrl: "", saveMode: "local" },
+      auth: { kaprodiPassword: "kaprodi", dplPasswords: {} },
+      seedMeta: { version: 0 }
+    };
+
+    function mergeState(base, parsed) {
+      return {
+        ...JSON.parse(JSON.stringify(base)),
+        ...parsed,
+        weights: { ...base.weights, ...(parsed.weights || {}) },
+        settings: { ...base.settings, ...(parsed.settings || {}) },
+        auth: {
+          kaprodiPassword: (parsed.auth && parsed.auth.kaprodiPassword) || base.auth.kaprodiPassword,
+          dplPasswords: { ...base.auth.dplPasswords, ...((parsed.auth && parsed.auth.dplPasswords) || {}) }
+        },
+        seedMeta: { ...base.seedMeta, ...(parsed.seedMeta || {}) }
+      };
+    }
+
+    function applySeed(current, seed, seedVer) {
+      const merged = JSON.parse(JSON.stringify(current));
+      if (Array.isArray(seed.students)) merged.students = seed.students;
+      if (seed.weights) merged.weights = { ...merged.weights, ...seed.weights };
+      if (seed.settings) merged.settings = { ...merged.settings, ...seed.settings };
+      if (seed.auth) {
+        merged.auth = {
+          kaprodiPassword: seed.auth.kaprodiPassword || merged.auth.kaprodiPassword,
+          dplPasswords: { ...(merged.auth.dplPasswords || {}), ...(seed.auth.dplPasswords || {}) }
+        };
+      }
+      // Nilai yang sudah diinput di perangkat ini dipertahankan (menang atas seed).
+      merged.assessments = { ...(seed.assessments || {}), ...(current.assessments || {}) };
+      merged.seedMeta = { version: seedVer };
+      return merged;
+    }
+
+    function loadState() {
+      const base = JSON.parse(JSON.stringify(defaultState));
+      const raw = localStorage.getItem(STORAGE_KEY);
+      let stored = null;
+      if (raw) { try { stored = JSON.parse(raw); } catch { stored = null; } }
+      let st = stored ? mergeState(base, stored) : base;
+
+      if (EMBEDDED_SEED && typeof EMBEDDED_SEED === "object") {
+        const seedVer = Number(EMBEDDED_SEED.seedVersion || 1);
+        const appliedVer = Number((st.seedMeta && st.seedMeta.version) || 0);
+        if (!stored || seedVer > appliedVer) {
+          st = applySeed(st, EMBEDDED_SEED, seedVer);
+        }
+      }
+      return st;
+    }
+
+    let state = loadState();
+    persist();
+
+    // ===== Sesi login =====
+    let session = loadSession();
+
+    function loadSession() {
+      try {
+        const s = JSON.parse(sessionStorage.getItem(SESSION_KEY));
+        if (s && (s.role === "kaprodi" || s.role === "dpl")) return s;
+      } catch {}
+      return { role: null, dpl: null };
+    }
+
+    function saveSession() {
+      sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    }
+
+    function persist() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function esc(value) {
+      return String(value ?? "").replace(/[&<>"']/g, s => ({
+        "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+      }[s]));
+    }
+
+    function norm(s) {
+      return String(s ?? "").trim().toLowerCase();
+    }
+
+    function today() {
+      return new Date().toISOString().slice(0,10);
+    }
+
+    function initTabs() {
+      const wrap = document.getElementById("tabs");
+      const list = currentTabs();
+      wrap.innerHTML = list.map(([id, label], i) => `
+        <button class="tab-btn ${i === 0 ? "active" : ""}" onclick="showTab('${id}', this)">${esc(label)}</button>
+      `).join("");
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      if (list.length) {
+        const first = document.getElementById(list[0][0]);
+        if (first) first.classList.add("active");
+      }
+    }
+
+    function showTab(id, btn) {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+      document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      if (btn) btn.classList.add("active");
+      renderAll();
+    }
+
+    /* ============================================================
+       LOGIN, PERAN, & MANAJEMEN AKUN
+       ============================================================ */
+
+    function genPassword(len = 6) {
+      const chars = "abcdefghjkmnpqrstuvwxyz23456789";
+      let out = "";
+      for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * chars.length)];
+      return out;
+    }
+
+    // Semua DPL tanpa filter peran (untuk dropdown login & panel akun).
+    function getAllDpls() {
+      return [...new Set(state.students.map(s => s.dpl).filter(Boolean))]
+        .sort((a, b) => norm(a).localeCompare(norm(b)));
+    }
+
+    // Mahasiswa yang boleh dilihat sesi saat ini.
+    function scopedStudents() {
+      if (session.role === "dpl" && session.dpl) {
+        return state.students.filter(s => norm(s.dpl) === norm(session.dpl));
+      }
+      return state.students;
+    }
+
+    function syncDplAccounts() {
+      if (!state.auth) state.auth = { kaprodiPassword: "kaprodi", dplPasswords: {} };
+      if (!state.auth.dplPasswords) state.auth.dplPasswords = {};
+      getAllDpls().forEach(d => {
+        if (!state.auth.dplPasswords[d]) state.auth.dplPasswords[d] = genPassword();
+      });
+    }
+
+    function showLogin() {
+      document.body.classList.add("locked");
+      document.body.classList.remove("authed", "role-dpl", "role-kaprodi");
+      refreshLoginDplOptions();
+      setLoginRole("dpl");
+      hideLoginError();
+      const noData = getAllDpls().length === 0;
+      document.getElementById("loginHint").innerHTML = noData
+        ? "Belum ada data DPL. Kaprodi dapat masuk dahulu untuk mengunggah CSV (password bawaan: <b>kaprodi</b> — segera ganti di tab Akun DPL)."
+        : "DPL: pilih nama lalu masukkan password dari Kaprodi. Kaprodi: pakai tombol di atas dan masukkan password Kaprodi.";
+    }
+
+    function refreshLoginDplOptions() {
+      const sel = document.getElementById("loginDplSelect");
+      const dpls = getAllDpls();
+      sel.innerHTML = dpls.length
+        ? dpls.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join("")
+        : '<option value="">(Belum ada DPL)</option>';
+    }
+
+    function setLoginRole(role) {
+      const isDpl = role === "dpl";
+      document.getElementById("roleBtnDpl").classList.toggle("active", isDpl);
+      document.getElementById("roleBtnKaprodi").classList.toggle("active", !isDpl);
+      document.getElementById("loginFormDpl").classList.toggle("active", isDpl);
+      document.getElementById("loginFormKaprodi").classList.toggle("active", !isDpl);
+      hideLoginError();
+      setTimeout(() => {
+        const f = isDpl ? document.getElementById("loginDplPass") : document.getElementById("loginKaprodiPass");
+        if (f) f.focus();
+      }, 30);
+    }
+
+    function loginError(msg) {
+      const el = document.getElementById("loginError");
+      el.textContent = msg;
+      el.classList.add("show");
+    }
+    function hideLoginError() {
+      document.getElementById("loginError").classList.remove("show");
+    }
+
+    function doLoginDpl() {
+      const dpl = document.getElementById("loginDplSelect").value;
+      const pass = document.getElementById("loginDplPass").value;
+      if (!dpl) return loginError("Belum ada DPL pada data. Hubungi Kaprodi.");
+      const expected = state.auth && state.auth.dplPasswords ? state.auth.dplPasswords[dpl] : null;
+      if (!expected) return loginError("Akun DPL ini belum memiliki password. Hubungi Kaprodi.");
+      if (pass !== expected) return loginError("Password DPL salah.");
+      enterApp("dpl", dpl);
+    }
+
+    function doLoginKaprodi() {
+      const pass = document.getElementById("loginKaprodiPass").value;
+      const expected = (state.auth && state.auth.kaprodiPassword) || "";
+      if (pass !== expected) return loginError("Password Kaprodi salah.");
+      enterApp("kaprodi", null);
+    }
+
+    function enterApp(role, dpl) {
+      session = { role, dpl: dpl || null };
+      saveSession();
+      document.getElementById("loginDplPass").value = "";
+      document.getElementById("loginKaprodiPass").value = "";
+      hideLoginError();
+      document.body.classList.remove("locked");
+      document.body.classList.add("authed");
+      startApp();
+    }
+
+    function logout() {
+      session = { role: null, dpl: null };
+      saveSession();
+      document.body.classList.remove("authed");
+      showLogin();
+    }
+
+    function startApp() {
+      applyRoleUI();
+      initTabs();
+      document.getElementById("tanggalNilai").value = today();
+      renderAll();
+      initDefaultSelections();
+      loadAssessmentForm();
+    }
+
+    function applyRoleUI() {
+      const isDpl = session.role === "dpl";
+      document.body.classList.toggle("role-dpl", isDpl);
+      document.body.classList.toggle("role-kaprodi", session.role === "kaprodi");
+
+      const who = document.getElementById("userWho");
+      if (session.role === "kaprodi") who.textContent = "Masuk sebagai: Kaprodi";
+      else if (isDpl) who.textContent = "Masuk sebagai: " + session.dpl + " (DPL)";
+      else who.textContent = "";
+
+      // Bobot komponen hanya bisa diubah Kaprodi.
+      ["bobotRpp", "bobotMedia", "bobotEvaluasi", "bobotBahan", "bobotLaporan"].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) { el.disabled = isDpl; el.title = isDpl ? "Bobot diatur oleh Kaprodi" : ""; }
+      });
+
+      // DPL tidak bisa berganti ke DPL lain pada form penilaian.
+      const pilihDpl = document.getElementById("pilihDpl");
+      if (pilihDpl) pilihDpl.disabled = isDpl;
+    }
+
+    /* ---- Panel Akun & Kontrol DPL (Kaprodi) ---- */
+
+    function renderAkun() {
+      if (session.role !== "kaprodi") return;
+      syncDplAccounts();
+      document.getElementById("kaprodiPassView").value = state.auth.kaprodiPassword || "";
+
+      const dpls = getAllDpls();
+      const rows = dpls.map((d, i) => {
+        const arr = state.students.filter(s => norm(s.dpl) === norm(d));
+        const total = arr.length;
+        const sudah = arr.filter(s => isAssessed(s.nim)).length;
+        const belum = total - sudah;
+        const pct = total ? Math.round((sudah / total) * 100) : 0;
+        const pw = state.auth.dplPasswords[d] || "";
+        const cls = pct === 100 ? "ok" : (pct > 0 ? "warn" : "bad");
+        return `
+          <tr>
+            <td><b>${esc(d)}</b></td>
+            <td>${total}</td>
+            <td>${sudah}</td>
+            <td>${belum}</td>
+            <td><span class="pill ${cls}">${pct}%</span></td>
+            <td>
+              <div class="pw-cell">
+                <input class="mono" id="pw_idx_${i}" value="${esc(pw)}">
+                <button class="secondary" onclick="setDplPassword(${i})">Simpan</button>
+              </div>
+            </td>
+            <td><button class="secondary" onclick="regenDplPassword(${i})">Acak</button></td>
+          </tr>`;
+      }).join("");
+      document.getElementById("tblAkun").innerHTML = rows ||
+        '<tr><td colspan="7" class="empty">Belum ada DPL. Unggah CSV pada Dashboard terlebih dahulu.</td></tr>';
+    }
+
+    function changeKaprodiPassword() {
+      const val = (document.getElementById("kaprodiPassNew").value || "").trim();
+      if (!val) return alert("Password baru tidak boleh kosong.");
+      state.auth.kaprodiPassword = val;
+      persist();
+      document.getElementById("kaprodiPassNew").value = "";
+      renderAkun();
+      alert("Password Kaprodi diperbarui.");
+    }
+
+    function setDplPassword(i) {
+      const d = getAllDpls()[i];
+      if (!d) return;
+      const val = (document.getElementById("pw_idx_" + i).value || "").trim();
+      if (!val) return alert("Password tidak boleh kosong.");
+      state.auth.dplPasswords[d] = val;
+      persist();
+      renderAkun();
+      alert("Password untuk " + d + " disimpan.");
+    }
+
+    function regenDplPassword(i) {
+      const d = getAllDpls()[i];
+      if (!d) return;
+      state.auth.dplPasswords[d] = genPassword();
+      persist();
+      renderAkun();
+    }
+
+    function syncAccountsManual() {
+      syncDplAccounts();
+      persist();
+      renderAkun();
+      alert("Akun DPL dilengkapi sesuai data CSV.");
+    }
+
+    function downloadAccountsCSV() {
+      syncDplAccounts();
+      const rows = [["dpl", "password", "jumlah_mahasiswa"]];
+      getAllDpls().forEach(d => {
+        const n = state.students.filter(s => norm(s.dpl) === norm(d)).length;
+        rows.push([d, state.auth.dplPasswords[d] || "", n]);
+      });
+      download("daftar_akun_dpl.csv", toCSV(rows), "text/csv");
+    }
+
+    function buildPublishConfig() {
+      syncDplAccounts();
+      persist();
+      const seed = {
+        seedVersion: Date.now(),
+        students: state.students,
+        assessments: state.assessments,
+        weights: state.weights,
+        settings: state.settings,
+        auth: state.auth
+      };
+      const code = "const EMBEDDED_SEED = " + JSON.stringify(seed) + ";";
+      document.getElementById("publishConfig").value = code;
+      return code;
+    }
+
+    function copyPublishConfig() {
+      const code = buildPublishConfig();
+      const ta = document.getElementById("publishConfig");
+      ta.focus();
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch {}
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(() => {}, () => {});
+        ok = true;
+      }
+      alert(ok
+        ? "Kode konfigurasi disalin.\n\nLangkah: buka index.html, cari baris  const EMBEDDED_SEED = null;  lalu ganti seluruh baris itu dengan kode ini, simpan, dan publish ulang ke GitHub."
+        : "Salin manual teks pada kotak, lalu ganti baris  const EMBEDDED_SEED = null;  di index.html.");
+    }
+
+    function parseCSV(text) {
+      const rows = [];
+      let row = [], value = "", inQuotes = false;
+      for (let i = 0; i < text.length; i++) {
+        const c = text[i], next = text[i+1];
+        if (c === '"' && inQuotes && next === '"') { value += '"'; i++; }
+        else if (c === '"') { inQuotes = !inQuotes; }
+        else if (c === ',' && !inQuotes) { row.push(value); value = ""; }
+        else if ((c === '\n' || c === '\r') && !inQuotes) {
+          if (c === '\r' && next === '\n') i++;
+          row.push(value); value = "";
+          if (row.some(cell => cell.trim() !== "")) rows.push(row);
+          row = [];
+        } else value += c;
+      }
+      row.push(value);
+      if (row.some(cell => cell.trim() !== "")) rows.push(row);
+      return rows;
+    }
+
+    function normalizeHeader(h) {
+      return norm(h)
+        .replace(/[.\-]/g, "_")
+        .replace(/\s+/g, "_")
+        .replace(/[^a-z0-9_]/g, "");
+    }
+
+    function findColumn(header, candidates) {
+      for (const c of candidates) {
+        const idx = header.indexOf(c);
+        if (idx >= 0) return idx;
+      }
+      return -1;
+    }
+
+    function importCSV(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const rows = parseCSV(reader.result);
+        if (rows.length < 2) {
+          alert("CSV harus memiliki header dan minimal satu baris data.");
+          return;
+        }
+
+        const header = rows[0].map(normalizeHeader);
+        const col = {
+          dpl: findColumn(header, ["dpl", "nama_dpl", "dosen", "dosen_pembimbing", "pembimbing"]),
+          nim: findColumn(header, ["nim", "npm", "no_induk"]),
+          nama: findColumn(header, ["nama", "nama_mahasiswa", "mahasiswa"]),
+          kelas: findColumn(header, ["kelas", "rombel"]),
+          sekolah: findColumn(header, ["sekolah", "sekolah_p3k", "lokasi", "tempat_p3k"]),
+          rpp: findColumn(header, ["link_rpp", "rpp", "unggah_rpp"]),
+          media: findColumn(header, ["link_media", "media", "unggah_media"]),
+          evaluasi: findColumn(header, ["link_alat_evaluasi", "alat_evaluasi", "evaluasi", "link_evaluasi"]),
+          bahan: findColumn(header, ["link_bahan_ajar", "bahan_ajar", "bahan", "link_bahan"]),
+          laporan: findColumn(header, ["link_laporan_akhir", "laporan_akhir", "laporan", "link_laporan"])
+        };
+
+        if (col.dpl < 0 || col.nim < 0 || col.nama < 0) {
+          alert("Kolom wajib tidak ditemukan. Pastikan CSV memiliki kolom: dpl, nim, nama.");
+          return;
+        }
+
+        const students = [];
+        const seen = new Set();
+
+        rows.slice(1).forEach(r => {
+          const nim = (r[col.nim] || "").trim();
+          const nama = (r[col.nama] || "").trim();
+          const dpl = (r[col.dpl] || "").trim();
+          if (!nim || !nama || !dpl) return;
+          const key = nim;
+          if (seen.has(key)) return;
+          seen.add(key);
+          students.push({
+            dpl,
+            nim,
+            nama,
+            kelas: col.kelas >= 0 ? (r[col.kelas] || "").trim() : "",
+            sekolah: col.sekolah >= 0 ? (r[col.sekolah] || "").trim() : "",
+            links: {
+              rpp: col.rpp >= 0 ? (r[col.rpp] || "").trim() : "",
+              media: col.media >= 0 ? (r[col.media] || "").trim() : "",
+              evaluasi: col.evaluasi >= 0 ? (r[col.evaluasi] || "").trim() : "",
+              bahan: col.bahan >= 0 ? (r[col.bahan] || "").trim() : "",
+              laporan: col.laporan >= 0 ? (r[col.laporan] || "").trim() : ""
+            }
+          });
+        });
+
+        state.students = students;
+        persist();
+        renderAll();
+        initDefaultSelections();
+        alert(`${students.length} mahasiswa berhasil dibaca dari CSV.`);
+        event.target.value = "";
+      };
+      reader.readAsText(file);
+    }
+
+    function toCSV(rows) {
+      return rows.map(row => row.map(cell => {
+        const text = String(cell ?? "");
+        return /[",\n\r]/.test(text) ? '"' + text.replace(/"/g, '""') + '"' : text;
+      }).join(",")).join("\n");
+    }
+
+    function download(filename, content, type = "text/plain") {
+      const blob = new Blob([content], { type });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function getDpls() {
+      return [...new Set(scopedStudents().map(s => s.dpl).filter(Boolean))]
+        .sort((a,b) => norm(a).localeCompare(norm(b)));
+    }
+
+    function studentsByDpl(dpl) {
+      return scopedStudents().filter(s => norm(s.dpl) === norm(dpl))
+        .sort((a,b) => norm(a.nama).localeCompare(norm(b.nama)));
+    }
+
+    function getStudent(nim) {
+      return scopedStudents().find(s => String(s.nim) === String(nim));
+    }
+
+    function assessment(nim) {
+      return state.assessments[nim] || null;
+    }
+
+    function isAssessed(nim) {
+      const a = assessment(nim);
+      return !!(a && [a.rpp, a.media, a.evaluasi, a.bahan, a.laporan].every(v => isValidScore(v)));
+    }
+
+    function isValidScore(v) {
+      const n = Number(v);
+      return Number.isFinite(n) && n >= 0 && n <= 100;
+    }
+
+    function clampScore(v) {
+      if (v === "" || v === null || v === undefined) return null;
+      const n = Number(v);
+      if (!Number.isFinite(n)) return null;
+      return Math.max(0, Math.min(100, n));
+    }
+
+    function calculateScoreObj(obj) {
+      if (!obj) return null;
+      const scores = {
+        rpp: clampScore(obj.rpp),
+        media: clampScore(obj.media),
+        evaluasi: clampScore(obj.evaluasi),
+        bahan: clampScore(obj.bahan),
+        laporan: clampScore(obj.laporan)
+      };
+      if (Object.values(scores).some(v => v === null)) return null;
+      const w = state.weights;
+      const totalW = Number(w.rpp) + Number(w.media) + Number(w.evaluasi) + Number(w.bahan) + Number(w.laporan);
+      if (!totalW) return null;
+      return (
+        scores.rpp * Number(w.rpp) +
+        scores.media * Number(w.media) +
+        scores.evaluasi * Number(w.evaluasi) +
+        scores.bahan * Number(w.bahan) +
+        scores.laporan * Number(w.laporan)
+      ) / totalW;
+    }
+
+    function finalScore(nim) {
+      return calculateScoreObj(assessment(nim));
+    }
+
+    function fmt(n) {
+      if (n === null || n === undefined || Number.isNaN(n)) return "-";
+      return Number(n).toFixed(2).replace(/\.00$/, "");
+    }
+
+    function category(score) {
+      if (score === null || score === undefined || Number.isNaN(score)) return "-";
+      if (score >= 86) return "Sangat Baik";
+      if (score >= 76) return "Baik";
+      if (score >= 66) return "Cukup";
+      return "Perlu Pembinaan";
+    }
+
+    function linkButton(url, label) {
+      if (!url) return "";
+      return `<a href="${esc(url)}" target="_blank" rel="noopener">${label}</a>`;
+    }
+
+    function linkList(s) {
+      const links = [
+        linkButton(s.links?.rpp, "RPP"),
+        linkButton(s.links?.media, "Media"),
+        linkButton(s.links?.evaluasi, "Alat Evaluasi"),
+        linkButton(s.links?.bahan, "Bahan Ajar"),
+        linkButton(s.links?.laporan, "Laporan Akhir")
+      ].filter(Boolean).join("");
+      return links || '<span class="small">Belum ada link berkas di CSV.</span>';
+    }
+
+    function renderAll() {
+      persist();
+      renderStats();
+      renderGrouping();
+      renderFilters();
+      renderDataTable();
+      renderAssessmentSelectors();
+      renderRekap();
+      renderSettings();
+      renderWeights();
+      renderAkun();
+    }
+
+    function renderStats() {
+      const scoped = scopedStudents();
+      const total = scoped.length;
+      const dplCount = getDpls().length;
+      const assessed = scoped.filter(s => isAssessed(s.nim)).length;
+      document.getElementById("statMhs").textContent = total;
+      document.getElementById("statDpl").textContent = dplCount;
+      document.getElementById("statDinilai").textContent = assessed;
+      document.getElementById("statBelum").textContent = total - assessed;
+    }
+
+    function renderGrouping() {
+      const dpls = getDpls();
+      const html = dpls.map(dpl => {
+        const arr = studentsByDpl(dpl);
+        const sudah = arr.filter(s => isAssessed(s.nim)).length;
+        const list = arr.slice(0, 8).map(s => `<li>${esc(s.nama)} <span class="small">(${esc(s.nim)})</span></li>`).join("");
+        return `
+          <div class="dpl-box">
+            <h3>${esc(dpl)} <span class="pill primary">${arr.length} mahasiswa</span></h3>
+            <p class="small">Sudah dinilai: ${sudah}/${arr.length}</p>
+            <ol>${list}</ol>
+            <button class="secondary" onclick="goAssessDpl('${esc(dpl)}')">Nilai Mahasiswa DPL Ini</button>
+          </div>`;
+      }).join("");
+      document.getElementById("dplGrouping").innerHTML = html || '<div class="empty">Belum ada CSV. Unggah CSV pembagian DPL terlebih dahulu.</div>';
+    }
+
+    function renderFilters() {
+      const options = '<option value="">Semua DPL</option>' + getDpls().map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join("");
+      ["filterDplData", "filterDplRekap"].forEach(id => {
+        const el = document.getElementById(id);
+        const old = el.value;
+        el.innerHTML = options;
+        if ([...el.options].some(o => o.value === old)) el.value = old;
+      });
+    }
+
+    function filteredStudents(searchId, dplFilterId, nilaiFilterId) {
+      const q = norm(document.getElementById(searchId)?.value || "");
+      const dpl = document.getElementById(dplFilterId)?.value || "";
+      const nilai = document.getElementById(nilaiFilterId)?.value || "";
+      return scopedStudents().filter(s => {
+        const text = norm([s.dpl, s.nim, s.nama, s.kelas, s.sekolah].join(" "));
+        const matchQ = !q || text.includes(q);
+        const matchDpl = !dpl || norm(s.dpl) === norm(dpl);
+        const assessed = isAssessed(s.nim);
+        const matchNilai = !nilai || (nilai === "sudah" ? assessed : !assessed);
+        return matchQ && matchDpl && matchNilai;
+      }).sort((a,b) => norm(a.dpl).localeCompare(norm(b.dpl)) || norm(a.nama).localeCompare(norm(b.nama)));
+    }
+
+    function renderDataTable() {
+      const rows = filteredStudents("searchData", "filterDplData", "filterNilaiData").map(s => {
+        const sc = finalScore(s.nim);
+        return `
+          <tr>
+            <td>${esc(s.dpl)}</td>
+            <td>${esc(s.nim)}</td>
+            <td>${esc(s.nama)}</td>
+            <td>${esc(s.kelas)}</td>
+            <td>${esc(s.sekolah)}</td>
+            <td><div class="link-list">${linkList(s)}</div></td>
+            <td>${isAssessed(s.nim) ? `<span class="pill ok">${fmt(sc)}</span>` : '<span class="pill bad">Belum dinilai</span>'}</td>
+            <td><button class="secondary" onclick="goAssessStudent('${esc(s.nim)}')">Nilai</button></td>
+          </tr>`;
+      }).join("");
+      document.getElementById("tblData").innerHTML = rows || '<tr><td colspan="8" class="empty">Belum ada data mahasiswa.</td></tr>';
+    }
+
+    function renderAssessmentSelectors() {
+      const dplSel = document.getElementById("pilihDpl");
+      const oldDpl = dplSel.value;
+      dplSel.innerHTML = getDpls().map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join("") || '<option value="">Belum ada DPL</option>';
+      if ([...dplSel.options].some(o => o.value === oldDpl)) dplSel.value = oldDpl;
+
+      const currentDpl = dplSel.value;
+      const mSel = document.getElementById("pilihMahasiswa");
+      const oldM = mSel.value;
+      mSel.innerHTML = studentsByDpl(currentDpl).map(s => `<option value="${esc(s.nim)}">${esc(s.nama)} - ${esc(s.nim)}</option>`).join("") || '<option value="">Belum ada mahasiswa</option>';
+      if ([...mSel.options].some(o => o.value === oldM)) mSel.value = oldM;
+    }
+
+    function initDefaultSelections() {
+      const dplSel = document.getElementById("pilihDpl");
+      if (dplSel.options.length) {
+        dplSel.selectedIndex = 0;
+        onDplChange();
+      }
+    }
+
+    function onDplChange() {
+      const mSel = document.getElementById("pilihMahasiswa");
+      const dpl = document.getElementById("pilihDpl").value;
+      mSel.innerHTML = studentsByDpl(dpl).map(s => `<option value="${esc(s.nim)}">${esc(s.nama)} - ${esc(s.nim)}</option>`).join("") || '<option value="">Belum ada mahasiswa</option>';
+      loadAssessmentForm();
+    }
+
+    function goAssessDpl(dpl) {
+      showTab("penilaian", [...document.querySelectorAll(".tab-btn")].find(b => b.textContent === "Penilaian"));
+      document.getElementById("pilihDpl").value = dpl;
+      onDplChange();
+    }
+
+    function goAssessStudent(nim) {
+      const s = getStudent(nim);
+      if (!s) return;
+      showTab("penilaian", [...document.querySelectorAll(".tab-btn")].find(b => b.textContent === "Penilaian"));
+      document.getElementById("pilihDpl").value = s.dpl;
+      onDplChange();
+      document.getElementById("pilihMahasiswa").value = nim;
+      loadAssessmentForm();
+    }
+
+    function loadAssessmentForm() {
+      const nim = document.getElementById("pilihMahasiswa").value;
+      const s = getStudent(nim);
+      const a = assessment(nim) || {};
+      document.getElementById("tanggalNilai").value = a.tanggal || today();
+      document.getElementById("nilaiRpp").value = a.rpp ?? "";
+      document.getElementById("nilaiMedia").value = a.media ?? "";
+      document.getElementById("nilaiEvaluasi").value = a.evaluasi ?? "";
+      document.getElementById("nilaiBahan").value = a.bahan ?? "";
+      document.getElementById("nilaiLaporan").value = a.laporan ?? "";
+      document.getElementById("catatanDpl").value = a.catatan || "";
+
+      if (s) {
+        document.getElementById("studentInfo").innerHTML = `
+          <b>${esc(s.nama)}</b> (${esc(s.nim)})<br>
+          DPL: ${esc(s.dpl)}<br>
+          Kelas: ${esc(s.kelas || "-")}<br>
+          Sekolah: ${esc(s.sekolah || "-")}
+        `;
+        document.getElementById("studentLinks").innerHTML = linkList(s);
+      } else {
+        document.getElementById("studentInfo").textContent = "Belum ada mahasiswa dipilih.";
+        document.getElementById("studentLinks").innerHTML = "";
+      }
+      previewScore();
+    }
+
+    function currentAssessmentFromForm() {
+      return {
+        tanggal: document.getElementById("tanggalNilai").value || today(),
+        rpp: clampScore(document.getElementById("nilaiRpp").value),
+        media: clampScore(document.getElementById("nilaiMedia").value),
+        evaluasi: clampScore(document.getElementById("nilaiEvaluasi").value),
+        bahan: clampScore(document.getElementById("nilaiBahan").value),
+        laporan: clampScore(document.getElementById("nilaiLaporan").value),
+        catatan: document.getElementById("catatanDpl").value.trim()
+      };
+    }
+
+    function previewScore() {
+      const obj = currentAssessmentFromForm();
+      const score = calculateScoreObj(obj);
+      document.getElementById("previewNilai").textContent = `Nilai akhir: ${fmt(score)}`;
+      document.getElementById("previewKategori").textContent = `Kategori: ${category(score)}`;
+    }
+
+    async function saveAssessment() {
+      const nim = document.getElementById("pilihMahasiswa").value;
+      const s = getStudent(nim);
+      if (!s) return alert("Pilih mahasiswa terlebih dahulu.");
+
+      const obj = currentAssessmentFromForm();
+      if ([obj.rpp, obj.media, obj.evaluasi, obj.bahan, obj.laporan].some(v => v === null)) {
+        return alert("Semua komponen nilai wajib diisi 0–100.");
+      }
+
+      obj.nilai_akhir = calculateScoreObj(obj);
+      obj.kategori = category(obj.nilai_akhir);
+      obj.dpl = s.dpl;
+      obj.nim = s.nim;
+      obj.nama = s.nama;
+      obj.kelas = s.kelas;
+      obj.sekolah = s.sekolah;
+      obj.updated_at = new Date().toISOString();
+
+      state.assessments[nim] = obj;
+      persist();
+      renderAll();
+
+      if (state.settings.saveMode === "local_script") {
+        await sendToAppsScript(obj);
+      } else {
+        alert("Nilai tersimpan di browser. Gunakan ekspor CSV untuk rekap, atau aktifkan Apps Script jika ingin masuk Google Sheets.");
+      }
+    }
+
+    function clearAssessmentForm() {
+      ["nilaiRpp","nilaiMedia","nilaiEvaluasi","nilaiBahan","nilaiLaporan","catatanDpl"].forEach(id => document.getElementById(id).value = "");
+      document.getElementById("tanggalNilai").value = today();
+      previewScore();
+    }
+
+    function deleteCurrentAssessment() {
+      const nim = document.getElementById("pilihMahasiswa").value;
+      if (!nim) return;
+      if (!confirm("Hapus nilai mahasiswa ini dari penyimpanan lokal?")) return;
+      delete state.assessments[nim];
+      persist();
+      loadAssessmentForm();
+      renderAll();
+    }
+
+    function renderWeights() {
+      document.getElementById("bobotRpp").value = state.weights.rpp;
+      document.getElementById("bobotMedia").value = state.weights.media;
+      document.getElementById("bobotEvaluasi").value = state.weights.evaluasi;
+      document.getElementById("bobotBahan").value = state.weights.bahan;
+      document.getElementById("bobotLaporan").value = state.weights.laporan;
+      const total = Number(state.weights.rpp) + Number(state.weights.media) + Number(state.weights.evaluasi) + Number(state.weights.bahan) + Number(state.weights.laporan);
+      const el = document.getElementById("bobotTotal");
+      el.textContent = `Total bobot: ${total}%`;
+      el.className = total === 100 ? "pill ok" : "pill warn";
+      previewScore();
+    }
+
+    function saveBobot() {
+      state.weights.rpp = Number(document.getElementById("bobotRpp").value || 0);
+      state.weights.media = Number(document.getElementById("bobotMedia").value || 0);
+      state.weights.evaluasi = Number(document.getElementById("bobotEvaluasi").value || 0);
+      state.weights.bahan = Number(document.getElementById("bobotBahan").value || 0);
+      state.weights.laporan = Number(document.getElementById("bobotLaporan").value || 0);
+      persist();
+      renderWeights();
+      renderRekap();
+    }
+
+    function renderRekap() {
+      const rows = filteredStudents("searchRekap", "filterDplRekap", "filterNilaiRekap").map(s => {
+        const a = assessment(s.nim) || {};
+        const sc = finalScore(s.nim);
+        return `
+          <tr>
+            <td>${esc(s.dpl)}</td>
+            <td>${esc(s.nim)}</td>
+            <td>${esc(s.nama)}</td>
+            <td>${esc(s.kelas)}</td>
+            <td>${esc(s.sekolah)}</td>
+            <td>${fmt(a.rpp)}</td>
+            <td>${fmt(a.media)}</td>
+            <td>${fmt(a.evaluasi)}</td>
+            <td>${fmt(a.bahan)}</td>
+            <td>${fmt(a.laporan)}</td>
+            <td><b>${fmt(sc)}</b></td>
+            <td>${category(sc)}</td>
+            <td>${esc(a.catatan || "")}</td>
+          </tr>`;
+      }).join("");
+      document.getElementById("tblRekap").innerHTML = rows || '<tr><td colspan="13" class="empty">Belum ada data rekap.</td></tr>';
+    }
+
+    function rowsAssessmentOnly() {
+      return scopedStudents().map(s => {
+        const a = assessment(s.nim) || {};
+        const sc = finalScore(s.nim);
+        return [
+          a.tanggal || "",
+          s.dpl, s.nim, s.nama, s.kelas, s.sekolah,
+          a.rpp ?? "", a.media ?? "", a.evaluasi ?? "", a.bahan ?? "", a.laporan ?? "",
+          fmt(sc), category(sc), a.catatan || ""
+        ];
+      });
+    }
+
+    function exportAssessmentCSV() {
+      const rows = [
+        ["tanggal","dpl","nim","nama","kelas","sekolah","nilai_rpp","nilai_media","nilai_alat_evaluasi","nilai_bahan_ajar","nilai_laporan_akhir","nilai_akhir","kategori","catatan_dpl"],
+        ...rowsAssessmentOnly()
+      ];
+      download("rekap_penilaian_p3k_dpl.csv", toCSV(rows), "text/csv");
+    }
+
+    function exportFullCSV() {
+      const rows = [
+        ["dpl","nim","nama","kelas","sekolah","link_rpp","link_media","link_alat_evaluasi","link_bahan_ajar","link_laporan_akhir","nilai_rpp","nilai_media","nilai_alat_evaluasi","nilai_bahan_ajar","nilai_laporan_akhir","nilai_akhir","kategori","catatan_dpl"]
+      ];
+      scopedStudents().forEach(s => {
+        const a = assessment(s.nim) || {};
+        const sc = finalScore(s.nim);
+        rows.push([
+          s.dpl, s.nim, s.nama, s.kelas, s.sekolah,
+          s.links?.rpp || "", s.links?.media || "", s.links?.evaluasi || "", s.links?.bahan || "", s.links?.laporan || "",
+          a.rpp ?? "", a.media ?? "", a.evaluasi ?? "", a.bahan ?? "", a.laporan ?? "",
+          fmt(sc), category(sc), a.catatan || ""
+        ]);
+      });
+      download("data_dan_nilai_p3k_dpl.csv", toCSV(rows), "text/csv");
+    }
+
+    function downloadTemplateCSV() {
+      const rows = [["dpl","nim","nama","kelas","sekolah","link_rpp","link_media","link_alat_evaluasi","link_bahan_ajar","link_laporan_akhir"]];
+      for (let d = 1; d <= 15; d++) {
+        for (let m = 1; m <= 8; m++) {
+          const nim = `23${String(d).padStart(2,"0")}${String(m).padStart(2,"0")}`;
+          rows.push([
+            `DPL ${d}`,
+            nim,
+            `Mahasiswa ${m} DPL ${d}`,
+            d % 2 ? "6A" : "6B",
+            `SD Mitra ${d}`,
+            "https://drive.google.com/",
+            "https://drive.google.com/",
+            "https://drive.google.com/",
+            "https://drive.google.com/",
+            "https://drive.google.com/"
+          ]);
+        }
+      }
+      download("template_pembagian_dpl_mahasiswa_p3k.csv", toCSV(rows), "text/csv");
+    }
+
+    function loadDemoData() {
+      if (state.students.length && !confirm("Ganti data saat ini dengan contoh 15 DPL × 8 mahasiswa?")) return;
+      const students = [];
+      for (let d = 1; d <= 15; d++) {
+        for (let m = 1; m <= 8; m++) {
+          const nim = `23${String(d).padStart(2,"0")}${String(m).padStart(2,"0")}`;
+          students.push({
+            dpl: `DPL ${d}`,
+            nim,
+            nama: `Mahasiswa ${m} DPL ${d}`,
+            kelas: d % 2 ? "6A" : "6B",
+            sekolah: `SD Mitra ${d}`,
+            links: {
+              rpp: "https://drive.google.com/",
+              media: "https://drive.google.com/",
+              evaluasi: "https://drive.google.com/",
+              bahan: "https://drive.google.com/",
+              laporan: "https://drive.google.com/"
+            }
+          });
+        }
+      }
+      state.students = students;
+      state.assessments = {};
+      persist();
+      renderAll();
+      initDefaultSelections();
+    }
+
+    function backupJSON() {
+      download("backup_p3k_penilaian_dpl.json", JSON.stringify(state, null, 2), "application/json");
+    }
+
+    function restoreJSON(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const data = JSON.parse(reader.result);
+          if (!Array.isArray(data.students)) throw new Error("Format salah");
+          state = {
+            ...JSON.parse(JSON.stringify(defaultState)),
+            ...data,
+            weights: { ...defaultState.weights, ...(data.weights || {}) },
+            settings: { ...defaultState.settings, ...(data.settings || {}) }
+          };
+          persist();
+          renderAll();
+          initDefaultSelections();
+          alert("Data berhasil direstore.");
+        } catch {
+          alert("File JSON tidak valid.");
+        }
+        event.target.value = "";
+      };
+      reader.readAsText(file);
+    }
+
+    function resetAll() {
+      if (!confirm("Reset semua data CSV dan nilai dari browser ini?")) return;
+      state = JSON.parse(JSON.stringify(defaultState));
+      persist();
+      renderAll();
+      clearAssessmentForm();
+    }
+
+    function printRekap() {
+      document.querySelectorAll(".section").forEach(s => s.classList.remove("print-active"));
+      document.getElementById("rekap").classList.add("print-active");
+      window.print();
+    }
+
+    function renderSettings() {
+      document.getElementById("appsScriptUrl").value = state.settings.appsScriptUrl || "";
+      document.getElementById("saveMode").value = state.settings.saveMode || "local";
+    }
+
+    function saveSettings() {
+      state.settings.appsScriptUrl = document.getElementById("appsScriptUrl").value.trim();
+      state.settings.saveMode = document.getElementById("saveMode").value;
+      persist();
+      alert("Pengaturan disimpan.");
+    }
+
+    async function sendToAppsScript(payload) {
+      const url = state.settings.appsScriptUrl;
+      if (!url) {
+        alert("URL Apps Script belum diisi. Nilai hanya tersimpan lokal.");
+        return;
+      }
+
+      try {
+        const res = await fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ type: "assessment", payload })
+        });
+        alert("Nilai tersimpan lokal dan dikirim ke Apps Script. Cek Google Sheets untuk memastikan data masuk.");
+      } catch (err) {
+        alert("Nilai tersimpan lokal, tetapi gagal dikirim ke Apps Script. Periksa URL/deploy Apps Script.");
+      }
+    }
+
+    async function testAppsScript() {
+      saveSettings();
+      const url = state.settings.appsScriptUrl;
+      if (!url) return alert("Isi URL Apps Script dulu.");
+      try {
+        await fetch(url, {
+          method: "POST",
+          mode: "no-cors",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ type: "test", payload: { message: "Tes koneksi P3K", waktu: new Date().toISOString() } })
+        });
+        alert("Tes dikirim. Cek Google Sheets apakah baris test masuk.");
+      } catch {
+        alert("Gagal mengirim tes. Periksa URL Apps Script.");
+      }
+    }
+
+    function downloadAppsScript() {
+      download("apps_script.gs", APPS_SCRIPT_CODE, "text/plain");
+    }
+
+    const APPS_SCRIPT_CODE = `function doPost(e) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheetName = "penilaian_dpl";
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) {
+    sheet = ss.insertSheet(sheetName);
+    sheet.appendRow([
+      "Timestamp", "DPL", "NIM", "Nama", "Kelas", "Sekolah",
+      "RPP", "Media", "Alat Evaluasi", "Bahan Ajar", "Laporan Akhir",
+      "Nilai Akhir", "Kategori", "Catatan DPL", "Updated At"
+    ]);
+  }
+
+  var data = JSON.parse(e.postData.contents || "{}");
+
+  if (data.type === "test") {
+    var testSheet = ss.getSheetByName("test_log") || ss.insertSheet("test_log");
+    testSheet.appendRow([new Date(), JSON.stringify(data.payload || {})]);
+    return ContentService.createTextOutput(JSON.stringify({ ok: true, type: "test" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+
+  var p = data.payload || {};
+  sheet.appendRow([
+    new Date(),
+    p.dpl || "",
+    p.nim || "",
+    p.nama || "",
+    p.kelas || "",
+    p.sekolah || "",
+    p.rpp || "",
+    p.media || "",
+    p.evaluasi || "",
+    p.bahan || "",
+    p.laporan || "",
+    p.nilai_akhir || "",
+    p.kategori || "",
+    p.catatan || "",
+    p.updated_at || ""
+  ]);
+
+  return ContentService.createTextOutput(JSON.stringify({ ok: true }))
+    .setMimeType(ContentService.MimeType.JSON);
+}`;
+
+    window.addEventListener("DOMContentLoaded", () => {
+      // Jika DPL yang tersimpan tak ada lagi di data (mis. setelah pembaruan), keluarkan.
+      if (session.role === "dpl") {
+        const exists = getAllDpls().some(d => norm(d) === norm(session.dpl));
+        if (!exists) { session = { role: null, dpl: null }; saveSession(); }
+      }
+
+      if (session.role === "kaprodi" || (session.role === "dpl" && session.dpl)) {
+        document.body.classList.remove("locked");
+        document.body.classList.add("authed");
+        startApp();
+      } else {
+        showLogin();
+      }
+    });
+  </script>
+</body>
+</html>
